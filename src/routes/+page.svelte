@@ -66,7 +66,7 @@
 			<span class="game-tag">Dagens spill</span>
 			<h1 class="game-title">Giljotinen</h1>
 			<p class="game-subtitle">
-				Uke {$gameStore.currentWord.weekNum}, {$gameStore.currentWord.year} – Gjett dagens ord
+				{$gameStore.currentWord.dateStr} – Gjett dagens ord
 			</p>
 		</div>
 

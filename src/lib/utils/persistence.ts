@@ -11,8 +11,8 @@ export interface SavedState {
 	startedAt: string | null;
 }
 
-export function stateKey(year: number, weekNum: number): string {
-	return `${LS_PREFIX}${year}_${weekNum}`;
+export function stateKey(year: number, dayNum: number): string {
+	return `${LS_PREFIX}${year}_d${dayNum}`;
 }
 
 export function saveState(key: string, state: SavedState): void {

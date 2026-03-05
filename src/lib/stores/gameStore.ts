@@ -1,11 +1,11 @@
 import { writable, derived, get } from 'svelte/store';
-import { getWordForWeek, type WeeklyWord, MAX_WRONG } from '$lib/data/words';
+import { getWordForDay, type DailyWord, MAX_WRONG } from '$lib/data/words';
 import { stateKey, saveState, loadState, clearState } from '$lib/utils/persistence';
 
 export type GameStatus = 'playing' | 'won' | 'lost';
 
 interface GameState {
-	currentWord: WeeklyWord;
+	currentWord: DailyWord;
 	guessedLetters: Set<string>;
 	correctLetters: Set<string>;
 	wrongLetters: string[];
@@ -15,7 +15,7 @@ interface GameState {
 }
 
 function createGameStore() {
-	const word = getWordForWeek();
+	const word = getWordForDay();
 
 	const initial: GameState = {
 		currentWord: word,
@@ -30,7 +30,7 @@ function createGameStore() {
 	const { subscribe, set, update } = writable<GameState>(initial);
 
 	function getKey(state: GameState): string {
-		return stateKey(state.currentWord.year, state.currentWord.weekNum);
+		return stateKey(state.currentWord.year, state.currentWord.dayNum);
 	}
 
 	function persist(state: GameState): void {
@@ -45,8 +45,8 @@ function createGameStore() {
 	}
 
 	function restore(): boolean {
-		const w = getWordForWeek();
-		const key = stateKey(w.year, w.weekNum);
+		const w = getWordForDay();
+		const key = stateKey(w.year, w.dayNum);
 		const saved = loadState(key, w.word);
 		if (!saved) return false;
 
@@ -92,38 +92,6 @@ function createGameStore() {
 		return isCorrect ? 'correct' : 'wrong';
 	}
 
-	function undo(): string | null {
-		let removed: string | null = null;
-
-		update((s) => {
-			if (s.gameStatus !== 'playing' || s.guessHistory.length === 0) return s;
-
-			const last = s.guessHistory[s.guessHistory.length - 1];
-			removed = last;
-
-			const newGuessed = new Set(s.guessedLetters);
-			newGuessed.delete(last);
-
-			const newCorrect = new Set(s.correctLetters);
-			newCorrect.delete(last);
-
-			const wasWrong = !s.correctLetters.has(last);
-			const newWrong = wasWrong ? s.wrongLetters.slice(0, -1) : [...s.wrongLetters];
-
-			const result: GameState = {
-				...s,
-				guessedLetters: newGuessed,
-				correctLetters: newCorrect,
-				wrongLetters: newWrong,
-				guessHistory: s.guessHistory.slice(0, -1)
-			};
-			persist(result);
-			return result;
-		});
-
-		return removed;
-	}
-
 	function reset(): void {
 		const state = get({ subscribe });
 		clearState(getKey(state));
@@ -142,7 +110,6 @@ function createGameStore() {
 	return {
 		subscribe,
 		guessLetter,
-		undo,
 		reset,
 		restore
 	};

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { WeeklyWord } from '$lib/data/words';
+	import type { DailyWord } from '$lib/data/words';
 	import { MAX_WRONG } from '$lib/data/words';
 	import { buildShareText, copyToClipboard } from '$lib/utils/share';
 	import type { GameStatus } from '$lib/stores/gameStore';
@@ -8,7 +8,7 @@
 		open: boolean;
 		gameStatus: GameStatus;
 		wrongCount: number;
-		currentWord: WeeklyWord;
+		currentWord: DailyWord;
 		onclose: () => void;
 		onreset: () => void;
 	}
@@ -18,7 +18,7 @@
 	let copied = $state(false);
 
 	async function share() {
-		const text = buildShareText(gameStatus, wrongCount, currentWord.weekNum, currentWord.year);
+		const text = buildShareText(gameStatus, wrongCount, currentWord.dateStr);
 		const ok = await copyToClipboard(text);
 		if (ok) {
 			copied = true;
@@ -48,7 +48,7 @@
 			{#if gameStatus === 'won'}
 				Du gjettet dagens ord med {wrongCount} feil av {MAX_WRONG} mulige.
 			{:else}
-				Bladet nådde bunnen. Bedre lykke neste uke!
+				Bladet nådde bunnen. Prøv igjen i morgen!
 			{/if}
 		</p>
 

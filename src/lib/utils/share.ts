@@ -4,10 +4,9 @@ import { MAX_WRONG } from '$lib/data/words';
 export function buildShareText(
 	status: GameStatus,
 	wrongCount: number,
-	weekNum: number,
-	year: number
+	dateStr: string
 ): string {
-	let text = `Giljotinen \u2014 Uke ${weekNum}, ${year}\n\n`;
+	let text = `Giljotinen \u2014 ${dateStr}\n\n`;
 	for (let i = 0; i < MAX_WRONG; i++) {
 		text += i < wrongCount ? '\u{1F7E5}' : '\u2B1C';
 	}
