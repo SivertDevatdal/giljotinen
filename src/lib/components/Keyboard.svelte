@@ -3,12 +3,10 @@
 		guessedLetters: Set<string>;
 		correctLetters: Set<string>;
 		disabled: boolean;
-		canUndo: boolean;
 		onguess: (letter: string) => void;
-		onundo: () => void;
 	}
 
-	let { guessedLetters, correctLetters, disabled, canUndo, onguess, onundo }: Props = $props();
+	let { guessedLetters, correctLetters, disabled, onguess }: Props = $props();
 
 	const ROWS_3 = [
 		['Q','W','E','R','T','Y','U','I','O','P','Å'],
@@ -30,11 +28,10 @@
 	if (e.ctrlKey || e.metaKey || e.altKey) return;
 	const key = e.key.toUpperCase();
 	if (ROWS_3.flat().includes(key)) { e.preventDefault(); onguess(key); }
-	if (e.key === 'Backspace') { e.preventDefault(); onundo(); }
 }} />
 
 <div class="keyboard">
-	{#each ROWS_3 as row, rowIdx}
+	{#each ROWS_3 as row}
 		<div class="kb-row">
 			{#each row as letter}
 				<button
@@ -43,19 +40,6 @@
 					onclick={() => onguess(letter)}
 				>{letter}</button>
 			{/each}
-			{#if rowIdx === ROWS_3.length - 1}
-				<button
-					class="kb-key kb-backspace"
-					disabled={!canUndo || disabled}
-					onclick={onundo}
-					aria-label="Angre"
-				>
-					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-						<path d="M21 4H8l-7 8 7 8h13a2 2 0 002-2V6a2 2 0 00-2-2z"/>
-						<line x1="18" y1="9" x2="12" y2="15"/><line x1="12" y1="9" x2="18" y2="15"/>
-					</svg>
-				</button>
-			{/if}
 		</div>
 	{/each}
 </div>
@@ -86,10 +70,6 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-	}
-	.kb-backspace {
-		width: 52px;
-		background: #eee;
 	}
 	.kb-key:hover:not(:disabled) {
 		background: #f0f0f0;

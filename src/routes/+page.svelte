@@ -35,9 +35,6 @@
 		}
 	}
 
-	function handleUndo() {
-		gameStore.undo();
-	}
 
 	function handleReset() {
 		showEndModal = false;
@@ -66,17 +63,16 @@
 <main class="layout">
 	<div class="game-panel">
 		<div class="game-header">
-			<span class="game-tag">Ukens spill</span>
+			<span class="game-tag">Dagens spill</span>
 			<h1 class="game-title">Giljotinen</h1>
 			<p class="game-subtitle">
-				Uke {$gameStore.currentWord.weekNum}, {$gameStore.currentWord.year} – Gjett ukens ord
+				Uke {$gameStore.currentWord.weekNum}, {$gameStore.currentWord.year} – Gjett dagens ord
 			</p>
 		</div>
 
 		<div class="clue-box">
 			<div class="clue-label">Ledetråd</div>
 			<p class="clue-text">{$gameStore.currentWord.hint}</p>
-			<p class="clue-source">«{$gameStore.currentWord.source}»</p>
 		</div>
 
 		<WordDisplay
@@ -100,9 +96,7 @@
 			guessedLetters={$gameStore.guessedLetters}
 			correctLetters={$gameStore.correctLetters}
 			disabled={!$isPlaying}
-			canUndo={$gameStore.guessHistory.length > 0}
 			onguess={handleGuess}
-			onundo={handleUndo}
 		/>
 
 		{#if $isFinished}
@@ -233,7 +227,6 @@
 		margin-bottom: 6px;
 	}
 	.clue-text { font-size: 16px; line-height: 1.5; color: var(--text); margin-bottom: 6px; }
-	.clue-source { font-size: 13px; color: var(--text-faint); font-style: italic; }
 
 	.wrong-section { text-align: center; margin-bottom: 24px; min-height: 36px; }
 	.wrong-label {

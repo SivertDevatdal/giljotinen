@@ -46,7 +46,7 @@
 		<h2>{gameStatus === 'won' ? 'Gratulerer!' : 'Giljotinen falt!'}</h2>
 		<p class="modal-message">
 			{#if gameStatus === 'won'}
-				Du gjettet ukens ord med {wrongCount} feil av {MAX_WRONG} mulige.
+				Du gjettet dagens ord med {wrongCount} feil av {MAX_WRONG} mulige.
 			{:else}
 				Bladet nådde bunnen. Bedre lykke neste uke!
 			{/if}
@@ -55,11 +55,6 @@
 		<div class="modal-word-reveal">
 			<div class="modal-word">{currentWord.word}</div>
 			<div class="modal-definition">{currentWord.hint}</div>
-		</div>
-
-		<div class="modal-article">
-			<div class="modal-article-label">Inspirert av</div>
-			<div class="modal-article-title">{currentWord.source}</div>
 		</div>
 
 		<div class="share-row">
@@ -134,17 +129,6 @@
 		text-transform: uppercase; margin-bottom: 6px;
 	}
 	.modal-definition { font-size: 14px; color: var(--text-muted); font-style: italic; }
-
-	.modal-article {
-		background: var(--surface); border-radius: 10px;
-		padding: 16px; margin-bottom: 20px;
-	}
-	.modal-article-label {
-		font-size: 11px; font-weight: 700;
-		text-transform: uppercase; letter-spacing: 1px;
-		color: var(--red); margin-bottom: 6px;
-	}
-	.modal-article-title { font-size: 15px; font-weight: 600; color: var(--text); line-height: 1.4; }
 
 	.share-row { display: flex; gap: 10px; justify-content: center; margin-bottom: 16px; }
 	.btn-share {

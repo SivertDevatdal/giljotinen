@@ -21,7 +21,7 @@
 
 		<div class="help-content">
 			<h3>Slik spiller du</h3>
-			<p>Gjett ukens skjulte ord, bokstav for bokstav. Du får en ledetråd som hint.</p>
+			<p>Gjett dagens skjulte ord, bokstav for bokstav. Du får en ledetråd som hint.</p>
 			<ul>
 				<li>Trykk på en bokstav for å gjette.</li>
 				<li>Riktig bokstav avslører alle forekomster i ordet.</li>

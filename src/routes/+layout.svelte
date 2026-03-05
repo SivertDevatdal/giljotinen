@@ -10,7 +10,7 @@
 
 <svelte:head>
 	<title>Giljotinen</title>
-	<meta name="description" content="Gjett ukens ord — et norsk ordspill." />
+	<meta name="description" content="Gjett dagens ord — et norsk ordspill." />
 </svelte:head>
 
 {@render children()}
