@@ -146,16 +146,16 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		padding: 10px 24px;
+		padding: 6px 24px;
 		background: var(--bg);
 		border-bottom: 1px solid var(--border);
 		overflow: visible;
 	}
 	.header-logo {
-		height: 48px;
+		height: 62px;
 		width: auto;
 		position: relative;
-		top: 8px;
+		top: 22px;
 	}
 	.header-help {
 		position: absolute;
