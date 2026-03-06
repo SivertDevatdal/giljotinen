@@ -146,7 +146,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		padding: 6px 24px;
+		padding: 2px 24px;
 		background: var(--bg);
 		border-bottom: 1px solid var(--border);
 		overflow: visible;
