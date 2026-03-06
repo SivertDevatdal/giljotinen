@@ -54,7 +54,7 @@
 </script>
 
 <header>
-	<span class="header-title">Giljotinen</span>
+	<img src="/logo.svg" alt="Giljotinen" class="header-logo" />
 	<button class="header-help" onclick={() => showHelpModal = true} aria-label="Hjelp">?</button>
 </header>
 
@@ -146,17 +146,16 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		padding: 14px 24px;
+		padding: 10px 24px;
 		background: var(--bg);
 		border-bottom: 1px solid var(--border);
+		overflow: visible;
 	}
-	.header-title {
-		font-family: var(--font-bold);
-		font-size: 20px;
-		font-weight: 900;
-		letter-spacing: .5px;
-		color: var(--red);
-		text-transform: uppercase;
+	.header-logo {
+		height: 48px;
+		width: auto;
+		position: relative;
+		top: 8px;
 	}
 	.header-help {
 		position: absolute;
